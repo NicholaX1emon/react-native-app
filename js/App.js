@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
-import AppNavigator from '../navigator'
+import AppNavigator from './navigator'
 import store from './store'
 
 export default class App extends Component {

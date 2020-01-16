@@ -9,14 +9,12 @@
 import React, { PureComponent } from 'react';
 import {
   StyleSheet,
-  ScrollView,
   View,
   FlatList,
   Text,
 } from 'react-native';
 
 import {
-  Header,
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
 
@@ -50,7 +48,8 @@ class FastList extends PureComponent {
   
 
   render () {
-    const { temp_data, refreshing } = this.state  
+    const { temp_data, refreshing } = this.state
+    const { navigation } = this.props
 
     return (
       <FlatList
@@ -76,6 +75,7 @@ class FastList extends PureComponent {
             this.setState({
               refreshing: false,
             })
+            navigation.navigate('Page1')
           }, 1000)
         }}
         onEndReached={() => {

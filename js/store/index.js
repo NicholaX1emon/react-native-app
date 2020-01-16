@@ -12,5 +12,5 @@ const middlewares = [
 
 const initialState = {}
 
-export default store = createStore(rootReducer, applyMiddleware(...middlewares), initialState)
+export default store = createStore(rootReducer, initialState, applyMiddleware(...middlewares))
 
