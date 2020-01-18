@@ -16,6 +16,17 @@ export default Page2 = ({navigation}) => {
           navigation.navigate('Page3')
         }}
       />
+      <Button 
+          title={'改变颜色-黄'}
+          onPress={() => {
+            navigation.setParams({
+              theme: {
+                activeTintColor: 'yellow',
+                updateTime: new Date().getTime()
+              }
+            })
+          }}
+        />
     </View>
   )
 }
