@@ -11,6 +11,7 @@ import axios from 'axios'
 import qs from 'qs'
 import Pingpp from 'pingpp-react-native'
 import NaviUtil from '../../util/NaviUtil'
+import { countChange } from '../../action'
 
 export default class Page1 extends Component {
   constructor(props) {
@@ -23,48 +24,11 @@ export default class Page1 extends Component {
       'Vue',
       'Java',
     ]
-
-    this.topTabNodes = [
-      (<Button 
-        title={'->跳转到Page2'}
-        onPress={() => {
-          navigation.navigate('Page2')
-        }}
-      />),
-      (
-        <Button 
-          title={'->跳转到FastList'}
-          onPress={() => {
-            NaviUtil.navigateTo('FastList')
-          }}
-        />
-      ),
-      (
-        <Button 
-          title={'改变颜色-红'}
-          onPress={() => {
-            navigation.setParams({
-              theme: {
-                activeTintColor: 'red',
-                updateTime: new Date().getTime()
-              }
-            })
-          }}
-        />
-      ),
-    ]
   }
 
-// "proxy": {
-//   "/*": {
-//     "target": "http://app.eatgreat.net",
-//     "changeOrigin": true,
-//     "pathRewrite": {}
-//   }
-// },
-  
   componentDidMount() {
     console.disableYellowBox = true
+    console.log('page1 props ---', this.props)
     // const url = `http://app.eatgreat.net/pay/booking/pay/charge/`
     // let charge = null
     // axios.post(url, qs.stringify({
@@ -82,7 +46,7 @@ export default class Page1 extends Component {
     // })).then(resp => {
     //   console.log('resp ---', resp)
     //   console.log('charge ---', resp.data.data.charge)
-      
+
     //   // charge = JSON.stringify(resp.data.data.charge)
     //   charge = JSON.stringify(resp.data.data.charge)
     //   console.log('charge string--', charge)
@@ -106,7 +70,7 @@ export default class Page1 extends Component {
     const tabs = {}
     this.initialTopTabs.forEach((tab, index) => {
       tabs[`tab${index}`] = {
-        screen: props => <TopTabComponent {...props} label={tab} node={this.topTabNodes[index]}/>,
+        screen: props => <View><Text>haha</Text></View>,
         navigationOptions: {
           title: tab,
         }
@@ -114,25 +78,31 @@ export default class Page1 extends Component {
     })
 
     return createAppContainer(createMaterialTopTabNavigator(tabs, {
-      tabBarOptions: {
-        scrollEnabled: true,
-        upperCaseLabel: false,
-        tabStyle: styles.tabStyle,
-        indicatorStyle: styles.indicatorStyle,
-        labelStyle: styles.labelStyle,
-        style: {
-          backgroundColor: 'red',
-        },
-      },
-    }))  
+      // tabBarOptions: {
+      //   scrollEnabled: true,
+      //   upperCaseLabel: false,
+      //   tabStyle: styles.tabStyle,
+      //   indicatorStyle: styles.indicatorStyle,
+      //   labelStyle: styles.labelStyle,
+      //   style: {
+      //     backgroundColor: 'red',
+      //   },
+      // },
+    }))
   }
-  
+
   render() {
     const TopTabsNavigator = this._topTabs()
     return (
       <View style={styles.container}>
         <TopTabsNavigator />
         <Text style={styles.title}>Welcome Home</Text>
+        <Button
+          title={`点击次数-${this.props.dynamicBottomNavigator.count || 0}`}
+          onPress={() => {
+            this.props.dispatch(countChange(1))
+          }}
+        />
       </View>
     )
   }
