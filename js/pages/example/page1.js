@@ -13,13 +13,13 @@ import axios from 'axios'
 import qs from 'qs'
 import NaviUtil from '../../util/NaviUtil'
 import { countChange, searchKeyword } from '../../action'
+import StorageUtil from '../../util/StorageUtil'
 
 
 class Page1 extends Component {
   componentDidMount() {
     console.disableYellowBox = true
     console.log('page1 props ---', this.props)
-    console.log(11111)
   }
 
   render() {
@@ -62,7 +62,7 @@ class Page1 extends Component {
           <Button
             title={`点击次数-${this.props.dynamicBottomNavigator.count || 0}`}
             onPress={() => {
-              this.props.dispatch(countChange(1))
+              // this.props.dispatch(countChange(1))
             }}
           />
         </View>
@@ -87,11 +87,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#333',
     textAlign: 'left',
-    paddingRight: 10,
+    paddingRight: 40,
   },
   avatar: {
     width: 80,
     height: 80,
+    borderRadius: 50,
     alignSelf: 'flex-end',
   },
   button: {
