@@ -1,1 +1,4 @@
-export { countChange } from './dynamicBottomNavigator'
+export { 
+  countChange,
+  searchKeyword,
+} from './dynamicBottomNavigator'
