@@ -5,7 +5,6 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import Entypo from 'react-native-vector-icons/Entypo'
 import { Page1, Page2, Page3 } from '../pages/example'
-import NaviUtil from '../util/NaviUtil'
 import { connect } from 'react-redux'
 
 const createTabs = props => {

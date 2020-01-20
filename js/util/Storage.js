@@ -2,10 +2,11 @@ import { AsyncStorage } from 'react-native'
 import axios from 'axios'
 import moment from 'moment'
 
-export default class StorageUtil {
+export default class Storage {
   static validateTimestamp(target) {
     if (!target.timestamp) return false
-    return moment().isSame(moment(target.timestamp).format('YYYY-MM-DD')) && moment().hour() - moment(target.timestamp).hour() < 4
+    // return moment().isSame(moment(target.timestamp).format('YYYY-MM-DD')) && moment().hour() - moment(target.timestamp).hour() < 4
+    return true
   }
 
   _wrapDataWithTimestamp(data) {
@@ -37,10 +38,9 @@ export default class StorageUtil {
 
   async fetchServerData(url) {
     try {
-      // const resp = await axios.get(url)
-      const resp = await axios.get('https://api.github.com/search/repositories?q=react')
-      console.log('resp ---', resp)
-      if (resp.status !== 200 || resp.status !== 0) throw new Error('RequestError: Bad Network')
+      const resp = await axios.get(url)
+      console.log('server resp ---', resp)
+      if (resp.status !== 200 && resp.status !== 0) throw new Error('RequestError: Bad Network')
       this.save('server_data', resp.data)
       return resp.data
     } catch(err) {
@@ -51,11 +51,13 @@ export default class StorageUtil {
   async fetchData(url, key) {
     try {
       const localData = this.load(key)
-      if (localData && StorageUtil.validateTimestamp(localData)) {
+      if (localData && Storage.validateTimestamp(localData)) {
+        console.log('local data ----', localData)
         return localData
       } else {
         try {
           const serverData = await this.fetchServerData(url)
+          console.log('server data ----', serverData)
           return this._wrapDataWithTimestamp(serverData)
         } catch(err) {
           throw new Error(`RequestError: failed to request data from ${url}`)
