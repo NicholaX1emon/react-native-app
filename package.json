@@ -14,7 +14,7 @@
     "axios": "^0.19.1",
     "moment": "^2.24.0",
     "pingpp-react-native": "^1.1.0",
-    "qs": "^6.9.1",
+    "qs": "^6.9.7",
     "react": "16.9.0",
     "react-native": "0.61.5",
     "react-native-gesture-handler": "^1.5.3",
